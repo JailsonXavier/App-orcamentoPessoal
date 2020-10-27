@@ -1,4 +1,4 @@
-//Evento ao clicar no botão
+
 class Despesas {
 	constructor(ano,mes,dia,tipo,descricao,valor){
 		this.ano = ano,
@@ -43,15 +43,15 @@ class Despesas {
 	}
 
 	RecuperarListaDespesas(){
-		//console.log('Recuperando teste');
+		
 
 		let despesa = Array()
 
 		let id = localStorage.getItem('id');		
 		for(let i=1; i<=id; i++){
-			//Recupera as despesas
+			
 			let despesas = JSON.parse(localStorage.getItem(i));
-			//Caso os indices sejam removidos
+			
 			if (despesas === null) {
 				continue
 			}
@@ -62,12 +62,11 @@ class Despesas {
 	}
 
 	pesquisar(despesas1){
-		//console.log(despesas1)
+		
 		let despesaFiltradas = Array();
 		despesaFiltradas = this.RecuperarListaDespesas();
 		
-		//console.log(despesas1)
-		//console.log(despesaFiltradas)
+		
 
 		if(despesas1.ano !='') {			
 			despesaFiltradas =despesaFiltradas.filter(a => a.ano == despesas1.ano)
@@ -120,7 +119,7 @@ function Cadastrar() {
 		descricao.value,valor.value);
 
 	if(despesas.ValidarDados()){
-		//alert('teste ok')	
+		
 		bd.gravar(despesas);
 		$('#exampleModal').modal('show')
 		document.getElementById('title').innerHTML = 'Sucesso'
@@ -135,7 +134,7 @@ function Cadastrar() {
 		descricao.value = ''
 		valor.value = ''
 	}else{
-		//alert('Corrigir')
+		
 		$('#exampleModal').modal('show')
 		document.getElementById('title').innerHTML = 'Corrigir'
 		document.getElementById('title').className = 'text-danger'
@@ -148,24 +147,23 @@ function Cadastrar() {
 
 function CarregarListaDespesas(despesa = Array(), filtrado = false){
 
-	//let despesa = Array()
+	
 	if (despesa == 0 && filtrado == false) {
 		despesa = bd.RecuperarListaDespesas();
 	}
 
-	//Selecionando o tbody
+	
 	let listaDespesas = document.getElementById('listadespesas')
 	listaDespesas.innerHTML = ''
 
 
 	despesa.forEach(function(d){
-		//console.log(d)
-		//criando linha
+		
 		let lista = listaDespesas.insertRow()
 
-		//criando coluna
+		
 		lista.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`
-		//Ajustar o tipo		
+				
 		switch(d.tipo){
 			case '1':d.tipo = 'Alimentação'
 			break
@@ -182,7 +180,7 @@ function CarregarListaDespesas(despesa = Array(), filtrado = false){
 		lista.insertCell(2).innerHTML = d.descricao
 		lista.insertCell(3).innerHTML = d.valor
 
-		//botão para excluir despesas
+		
 		let btn = document.createElement('button')
 		btn.className = 'btn btn-danger';
 		btn.innerHTML = '<i class ="fas fa-times"></i>'
@@ -191,19 +189,17 @@ function CarregarListaDespesas(despesa = Array(), filtrado = false){
 
 			let id = this.id.replace('id_depesa_', '')
 
-			//alert(id);
+			
 			if(btn.id){
 				alert('Excluido');
-				//$('#modal').modal('show')
-				//document.getElementById('title').innerHTML = 'Excluidos'
-				//console.log('teste')
+				
 			}
 			bd.remover(id)											
 			window.location.reload()			
 			
 		}
 		lista.insertCell(4).append(btn)
-		//console.log(d)
+		
 
 
 	})
@@ -225,4 +221,4 @@ function PesquisarDespesas(){
 	CarregarListaDespesas(despesa, true);
 
 
-	}	//Fim PesquisarDespesas
+	}	
