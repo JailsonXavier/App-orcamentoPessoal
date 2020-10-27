@@ -11,7 +11,7 @@ class Despesas {
 
 		ValidarDados(){
 			for(let i in this){
-				//console.log(i,this);
+				
 				if (this[i] == undefined || this[i] == '' || this[i] == null) {
 					return false
 				}
